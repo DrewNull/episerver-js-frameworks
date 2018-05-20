@@ -1,0 +1,10 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@model ClassicalMusicShop.Website.Features.Home.HomePage
+@{
+    Layout = "~/Features/Layout/Views/MainLayout.cshtml";
+}
+
+<div>
+    @Html.PropertyFor(m => m.MainContent)
+</div>

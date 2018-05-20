@@ -1,8 +1,7 @@
-﻿using System;
-using System.Web.Mvc;
-
-namespace ClassicalMusicShop.Website
+﻿namespace ClassicalMusicShop.Website
 {
+    using global::System.Web.Mvc;
+
     public class EPiServerApplication : EPiServer.Global
     {
         protected void Application_Start()
