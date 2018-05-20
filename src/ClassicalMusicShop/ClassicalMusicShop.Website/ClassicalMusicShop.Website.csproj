@@ -331,16 +331,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\Checkout\Views\" />
-    <Folder Include="Static\css\" />
+    <Folder Include="Static\css\common\" />
+    <Folder Include="Static\css\original\" />
     <Folder Include="Static\dist\" />
-    <Folder Include="Static\js-angular\" />
-    <Folder Include="Static\js-react\" />
-    <Folder Include="Static\js-vue\" />
-    <Folder Include="Static\js\" />
+    <Folder Include="Static\js\angular\" />
+    <Folder Include="Static\js\react\" />
+    <Folder Include="Static\js\vue\" />
     <Folder Include="Static\libs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Static\js\main-react.js" />
+    <Content Include="Static\js\main-vue.js" />
+    <Content Include="Static\js\main-angular.js" />
     <Content Include="Web.config" />
     <Content Include="Configs\baf.config" />
     <Content Include="Configs\baf.data.manager.config" />
@@ -383,6 +386,9 @@
     <Content Include="package.json" />
     <Content Include="package-lock.json" />
     <None Include="packages.config" />
+    <Content Include="Static\css\_foundation-settings.scss" />
+    <Content Include="Static\css\_main-common.scss" />
+    <Content Include="Static\css\main-original.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

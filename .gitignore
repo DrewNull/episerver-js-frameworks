@@ -4,3 +4,5 @@ bin
 node_modules
 obj
 packages
+
+/src/ClassicalMusicShop/ClassicalMusicShop.Website/Static/dist

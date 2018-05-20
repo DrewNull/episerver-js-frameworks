@@ -1,0 +1,8 @@
+﻿// Foundation
+@import "_foundation-settings";
+@import "../../node_modules/foundation-sites/scss/foundation";
+@include foundation-everything;
+
+body {
+    color: navy;
+}
