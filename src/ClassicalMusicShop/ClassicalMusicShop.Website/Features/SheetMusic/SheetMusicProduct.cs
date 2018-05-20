@@ -8,6 +8,7 @@
     using EPiServer.DataAbstraction;
     using EPiServer.DataAnnotations;
     using EPiServer.Shell.ObjectEditing;
+    using EPiServer.Web;
 
     [AvailableContentTypes(Availability.Specific, 
         Include = new []
@@ -25,5 +26,42 @@
             Order = 1000)]
         [SelectOne(SelectionFactoryType = typeof(AppModeSelectionFactory))]
         public virtual string AppMode { get; set; }
+
+        [Display(
+            Name = "Composer", 
+            GroupName = GroupDefinitions.Content, 
+            Order = 1000)]
+        public virtual string Composer { get; set; }
+
+        [Display(
+            Name = "Opus",
+            GroupName = GroupDefinitions.Content,
+            Order = 1100)]
+        public virtual string Opus { get; set; }
+
+        [Display(
+            Name = "Key",
+            GroupName = GroupDefinitions.Content,
+            Order = 1200)]
+        public virtual string Key { get; set; }
+
+        [Display(
+            Name = "Number of Movements",
+            GroupName = GroupDefinitions.Content,
+            Order = 1300)]
+        public virtual int MovementCount { get; set; }
+
+        [Display(
+            Name = "Movements",
+            GroupName = GroupDefinitions.Content,
+            Order = 1400)]
+        [UIHint(UIHint.Textarea)]
+        public virtual string MovementList { get; set; }
+
+        [Display(
+            Name = "Year",
+            GroupName = GroupDefinitions.Content,
+            Order = 1500)]
+        public virtual int Year { get; set; }
     }
 }
