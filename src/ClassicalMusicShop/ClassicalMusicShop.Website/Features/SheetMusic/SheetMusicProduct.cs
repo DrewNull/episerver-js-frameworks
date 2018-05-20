@@ -24,6 +24,6 @@
             GroupName = GroupDefinitions.Advanced, 
             Order = 1000)]
         [SelectOne(SelectionFactoryType = typeof(AppModeSelectionFactory))]
-        public string AppMode { get; set; }
+        public virtual string AppMode { get; set; }
     }
 }
