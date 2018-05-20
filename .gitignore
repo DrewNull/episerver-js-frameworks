@@ -1,8 +1,16 @@
 
+# global folders
 .vs
 bin
 node_modules
 obj
 packages
 
+# folders
 /src/ClassicalMusicShop/ClassicalMusicShop.Website/Static/dist
+
+# global files
+~$*.xlsx
+
+#files
+
