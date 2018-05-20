@@ -1,9 +1,15 @@
 namespace ClassicalMusicShop.Website.Core.Routing
 {
+    using System.Linq;
     using System.Web.Routing;
+    using EPiServer;
+    using EPiServer.Commerce.Catalog.ContentTypes;
     using EPiServer.Commerce.Routing;
     using EPiServer.Framework;
     using EPiServer.Framework.Initialization;
+    using EPiServer.ServiceLocation;
+    using EPiServer.Web.Routing;
+    using Mediachase.Commerce.Catalog;
 
     [InitializableModule]
     [ModuleDependency(typeof(EPiServer.Commerce.Initialization.InitializationModule))]
@@ -11,7 +17,11 @@ namespace ClassicalMusicShop.Website.Core.Routing
     {
         public void Initialize(InitializationEngine context)
         {
-            CatalogRouteHelper.MapDefaultHierarchialRouter(RouteTable.Routes, false);
+            var contentLoader = ServiceLocator.Current.GetInstance<IContentLoader>();
+            var referenceConverter = ServiceLocator.Current.GetInstance<ReferenceConverter>();
+
+            var firstCatalog = contentLoader.GetChildren<CatalogContent>(referenceConverter.GetRootLink()).First();
+            RouteTable.Routes.RegisterPartialRouter(new HierarchicalCatalogPartialRouter(() => EPiServer.Web.SiteDefinition.Current.StartPage, firstCatalog, false));
         }
 
         public void Preload(string[] parameters) { }
