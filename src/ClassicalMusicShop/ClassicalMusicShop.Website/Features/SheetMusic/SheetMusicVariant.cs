@@ -1,11 +1,11 @@
 ﻿namespace ClassicalMusicShop.Website.Features.SheetMusic
 {
     using System.ComponentModel.DataAnnotations;
-    using Core;
-    using Core.Models;
     using EPiServer.Commerce.Catalog.DataAnnotations;
     using EPiServer.DataAbstraction;
     using EPiServer.DataAnnotations;
+    using Infrastructure;
+    using Infrastructure.Models;
 
     [AvailableContentTypes(Availability.None)]
     [CatalogContentType(

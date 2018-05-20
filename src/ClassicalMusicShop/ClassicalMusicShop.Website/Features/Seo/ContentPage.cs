@@ -1,9 +1,9 @@
 ﻿namespace ClassicalMusicShop.Website.Features.Seo
 {
     using System.ComponentModel.DataAnnotations;
-    using Core;
-    using Core.Models;
     using EPiServer.Core;
+    using Infrastructure;
+    using Infrastructure.Models;
 
     public abstract class ContentPage : SitePage
     {

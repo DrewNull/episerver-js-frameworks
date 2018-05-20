@@ -298,36 +298,47 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
-    <Compile Include="Core\AppMode\AppMode.cs" />
-    <Compile Include="Core\AppMode\AppModeSelectionFactory.cs" />
-    <Compile Include="Core\Models\SiteBlock.cs" />
-    <Compile Include="Core\Models\SiteCategory.cs" />
-    <Compile Include="Core\Models\SiteMedia.cs" />
-    <Compile Include="Core\Models\SiteProduct.cs" />
-    <Compile Include="Core\Models\SiteVariant.cs" />
-    <Compile Include="Core\GroupDefinitions.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicVariantController.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicViewPathHelper.cs" />
+    <Compile Include="Infrastructure\AppMode\AppMode.cs" />
+    <Compile Include="Infrastructure\AppMode\AppModeSelectionFactory.cs" />
+    <Compile Include="Infrastructure\Models\SiteBlock.cs" />
+    <Compile Include="Infrastructure\Models\SiteCategory.cs" />
+    <Compile Include="Infrastructure\Models\SiteMedia.cs" />
+    <Compile Include="Infrastructure\Models\SiteProduct.cs" />
+    <Compile Include="Infrastructure\Models\SiteVariant.cs" />
+    <Compile Include="Infrastructure\GroupDefinitions.cs" />
+    <Compile Include="Features\Cart\AddToCartInputModel.cs" />
     <Compile Include="Features\Cart\CartApiController.cs" />
     <Compile Include="Features\Cart\CartPageController.cs" />
     <Compile Include="Features\Cart\CartPage.cs" />
     <Compile Include="Features\Cart\CartPageViewModel.cs" />
     <Compile Include="Features\Cart\CartPreviewViewModel.cs" />
-    <Compile Include="Features\Cart\CartService.cs" />
+    <Compile Include="Features\Cart\CartPageService.cs" />
+    <Compile Include="Features\Images\ImageMedia.cs" />
+    <Compile Include="Features\Images\ImageMediaModel.cs" />
+    <Compile Include="Features\Images\ImageMediaRepository.cs" />
     <Compile Include="Features\ProductCategories\ProductCategory.cs" />
     <Compile Include="Features\Seo\ContentPage.cs" />
-    <Compile Include="Core\Models\SitePage.cs" />
+    <Compile Include="Infrastructure\Models\SitePage.cs" />
     <Compile Include="Features\Home\HomePageController.cs" />
     <Compile Include="Features\Home\HomePage.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicProduct.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicProductController.cs" />
-    <Compile Include="Features\SheetMusic\SheetMusicProductViewModel.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicProductModel.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicProductRepository.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicService.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicViewModel.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicVariant.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicVariantModel.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicVariantRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Core\Routing\CommerceRoutingInitialization.cs" />
+    <Compile Include="Infrastructure\Routing\CommerceRoutingInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\ViewEngine\FeaturesViewEngine.cs" />
-    <Compile Include="Core\ViewEngine\FeaturesViewEngineInitialization.cs" />
+    <Compile Include="Infrastructure\ViewEngine\FeaturesViewEngine.cs" />
+    <Compile Include="Infrastructure\ViewEngine\FeaturesViewEngineInitialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\Checkout\Views\" />
@@ -371,10 +382,10 @@
     <Content Include="Features\Home\Views\HomePage\Index.cshtml" />
     <Content Include="Features\Layout\Views\MainLayout.cshtml" />
     <Content Include="Features\Web.config" />
-    <Content Include="Features\SheetMusic\Views\SheetMusicProduct\Index.cshtml" />
-    <Content Include="Features\SheetMusic\Views\SheetMusicProduct\IndexAngular.cshtml" />
-    <Content Include="Features\SheetMusic\Views\SheetMusicProduct\IndexReact.cshtml" />
-    <Content Include="Features\SheetMusic\Views\SheetMusicProduct\IndexVue.cshtml" />
+    <Content Include="Features\SheetMusic\Views\Index.cshtml" />
+    <Content Include="Features\SheetMusic\Views\IndexAngular.cshtml" />
+    <Content Include="Features\SheetMusic\Views\IndexReact.cshtml" />
+    <Content Include="Features\SheetMusic\Views\IndexVue.cshtml" />
     <Content Include="Features\Cart\Views\CartPage\Index.cshtml" />
     <Content Include="Features\Cart\Views\CartPreviewAngular.cshtml" />
     <Content Include="Features\Cart\Views\CartPreviewVue.cshtml" />

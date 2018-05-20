@@ -1,9 +1,9 @@
 ﻿namespace ClassicalMusicShop.Website.Features.ProductCategories
 {
-    using Core.Models;
     using EPiServer.Commerce.Catalog.DataAnnotations;
     using EPiServer.DataAbstraction;
     using EPiServer.DataAnnotations;
+    using Infrastructure.Models;
     using SheetMusic;
 
     [AvailableContentTypes(Availability.Specific,
