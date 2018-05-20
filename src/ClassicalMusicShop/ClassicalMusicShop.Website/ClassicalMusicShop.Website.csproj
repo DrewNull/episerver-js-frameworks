@@ -355,6 +355,7 @@
     <Content Include="Configs\ecf.ssl.config" />
     <Content Include="Configs\Mediachase.Search.config" />
     <Content Include="App_Data\GeoLiteCity.dat" />
+    <Content Include="webpack.config.js" />
     <None Include="EPiServerLog.config" />
     <Content Include="modules\_protected\EPiServer.Commerce.Shell\EPiServer.Commerce.Shell.zip" />
     <Content Include="modules\_protected\Commerce\Commerce.zip" />
@@ -379,6 +380,8 @@
     <Content Include="Features\Layout\Views\MainLayoutVue.cshtml" />
     <Content Include="Features\Layout\Views\MainLayoutAngular.cshtml" />
     <Content Include="Features\Layout\Views\MainLayoutReact.cshtml" />
+    <Content Include="package.json" />
+    <Content Include="package-lock.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
