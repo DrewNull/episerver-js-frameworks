@@ -4,6 +4,11 @@
 
     public class AddToCartInputModel
     {
+        public AddToCartInputModel()
+        {
+            
+        }
+
         public string Code { get; set; }
 
         public ContentReference CurrentPageLink { get; set; }

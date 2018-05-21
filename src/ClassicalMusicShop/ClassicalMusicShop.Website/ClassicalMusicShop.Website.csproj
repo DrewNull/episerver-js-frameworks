@@ -318,7 +318,7 @@
     <Compile Include="Features\Cart\CartPage.cs" />
     <Compile Include="Features\Cart\CartPageViewModel.cs" />
     <Compile Include="Features\Cart\CartPreviewViewModel.cs" />
-    <Compile Include="Features\Cart\CartPageService.cs" />
+    <Compile Include="Features\Cart\CartService.cs" />
     <Compile Include="Features\Images\ImageMedia.cs" />
     <Compile Include="Features\Images\ImageMediaModel.cs" />
     <Compile Include="Features\Images\ImageMediaRepository.cs" />
@@ -340,6 +340,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Routing\CommerceRoutingInitialization.cs" />
+    <Compile Include="Infrastructure\Routing\MvcAttributeRoutingInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\ViewEngine\FeaturesViewEngine.cs" />
     <Compile Include="Infrastructure\ViewEngine\FeaturesViewEngineInitialization.cs" />

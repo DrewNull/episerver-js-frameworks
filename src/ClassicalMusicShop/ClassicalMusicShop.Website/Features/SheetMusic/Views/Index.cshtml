@@ -1,5 +1,4 @@
-﻿@using ClassicalMusicShop.Website.Features.Cart
-@model ClassicalMusicShop.Website.Features.SheetMusic.SheetMusicViewModel
+﻿@model ClassicalMusicShop.Website.Features.SheetMusic.SheetMusicViewModel
 @{
     Layout = "~/Features/Layout/Views/MainLayout.cshtml";
 }
@@ -13,113 +12,121 @@
             }
         </div>
 
-        @* detail *@
+        @* product *@
         <div>
-
-            @* product *@
-            <div>
-                <div @Html.EditAttributes(x => x.ProductModel.Product.DisplayName)>
-                    <h1>@Model.ProductModel.Product.DisplayName</h1>
-                </div>
-                <div>
-                    <table>
-                        <tr>
-                            <td>Composer</td>
-                            <td>
-                                <div @Html.EditAttributes(x => x.ProductModel.Product.Composer)>
-                                    @Model.ProductModel.Product.Composer
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Opus</td>
-                            <td>
-                                <div @Html.EditAttributes(x => x.ProductModel.Product.Opus)>
-                                    Op.@Model.ProductModel.Product.Opus
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Key</td>
-                            <td>
-                                <div @Html.EditAttributes(x => x.ProductModel.Product.Key)>
-                                    @Model.ProductModel.Product.Key
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Movements</td>
-                            <td>
-                                <div @Html.EditAttributes(x => x.ProductModel.Product.MovementList)>
-                                    <ul>
-                                        @foreach (var movement in Model.ProductModel.Movements)
-                                        {
-                                            <li>@movement</li>
-                                        }
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Year</td>
-                            <td>
-                                <div @Html.EditAttributes(x => x.ProductModel.Product.YearComposed)>
-                                    @Model.ProductModel.Product.YearComposed
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+            <div @Html.EditAttributes(x => x.ProductModel.Product.DisplayName)>
+                <h1>@Model.ProductModel.Product.DisplayName</h1>
             </div>
 
-            @* instrument selection *@
             <div>
-                <ul>
-                    @foreach (var variantOption in Model.Instruments)
-                    {
-                        <li class="@(variantOption.IsSelected ? "active" : "")">
-                            <a href="@variantOption.Url">
-                                @variantOption.Text
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </div>
 
-            @if (Model.HasVariant)
-            {
-                // variant
+                @* variant *@
                 <div>
-                    <div @Html.EditAttributes(x => x.VariantModel.Variant.DisplayName)>
-                        <h2>@Model.VariantModel.Variant.DisplayName</h2>
-                    </div>
-                    <div @Html.EditAttributes(x => x.VariantModel.Variant.Code)>
-                        @Model.VariantModel.Variant.Code
-                    </div>
+
                     <div>
-                        @Model.VariantModel.Price.ToString("C")
+                        <div>Instrument</div>
+                        <div>
+                            <ul>
+                                @foreach (var variantOption in Model.Instruments)
+                                {
+                                    <li class="@(variantOption.IsSelected ? "active" : "")">
+                                        <a href="@variantOption.Url">
+                                            @variantOption.Text
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    @if (Model.HasVariant)
+                    {
+                        <div>
+                            <div @Html.EditAttributes(x => x.VariantModel.Variant.Code)>
+                                @Model.VariantModel.Variant.Code
+                            </div>
+                            <div>
+                                @Model.VariantModel.Price.ToString("C")
+                            </div>
+                        </div>
+
+                        <div>
+                            @{
+                                string code = Model.VariantModel.Variant.Code;
+                                var currentPageLink = Model.CurrentPageLink;
+                                int quantity = 1;
+                            }
+                            @using (Html.BeginForm("AddToCart", "CartPage", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(x => code)
+                                @Html.HiddenFor(x => currentPageLink)
+                                <div>
+                                    Quantity:
+                                    @Html.TextBoxFor(x => quantity)
+                                </div>
+                                <div>
+                                    <input type="submit" name="submit" value="Add to Cart" />
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+
+                @* details *@
+                <div>
+                    <h2>Details</h2>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Composer</td>
+                                <td>
+                                    <div @Html.EditAttributes(x => x.ProductModel.Product.Composer)>
+                                        @Model.ProductModel.Product.Composer
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Opus</td>
+                                <td>
+                                    <div @Html.EditAttributes(x => x.ProductModel.Product.Opus)>
+                                        Op.@Model.ProductModel.Product.Opus
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Key</td>
+                                <td>
+                                    <div @Html.EditAttributes(x => x.ProductModel.Product.Key)>
+                                        @Model.ProductModel.Product.Key
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Movements</td>
+                                <td>
+                                    <div @Html.EditAttributes(x => x.ProductModel.Product.MovementList)>
+                                        <ul>
+                                            @foreach (var movement in Model.ProductModel.Movements)
+                                            {
+                                                <li>@movement</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Year</td>
+                                <td>
+                                    <div @Html.EditAttributes(x => x.ProductModel.Product.YearComposed)>
+                                        @Model.ProductModel.Product.YearComposed
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
 
-                // cart
-                <div>
-                    @{
-                        var addToCartInputModel = new AddToCartInputModel
-                        {
-                            Code = Model.VariantModel.Variant.Code,
-                            CurrentPageLink = Model.CurrentPageLink,
-                            Quantity = 1
-                        };
-                    }
-                    @using (Html.BeginForm("AddToCart", "CartPage", FormMethod.Post))
-                    {
-                        @Html.HiddenFor(x => addToCartInputModel)
-                        @Html.HiddenFor(x => addToCartInputModel.CurrentPageLink)
-                        @Html.TextBoxFor(x => addToCartInputModel.Quantity)
-
-                    }
-                </div>
-            }
+            </div>
 
         </div>
 
