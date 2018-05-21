@@ -19,10 +19,10 @@
         private readonly UrlResolver _urlResolver;
 
         public CartService(
-            IOrderRepository orderRepository, 
-            IOrderGroupFactory orderGroupFactory, 
-            IPriceService priceService, 
-            IOrderGroupCalculator orderGroupCalculator, 
+            IOrderRepository orderRepository,
+            IOrderGroupFactory orderGroupFactory,
+            IPriceService priceService,
+            IOrderGroupCalculator orderGroupCalculator,
             UrlResolver urlResolver)
         {
             if (orderRepository == null) throw new ArgumentNullException(nameof(orderRepository));
@@ -37,7 +37,7 @@
             this._urlResolver = urlResolver;
         }
 
-        public string AddToCart(string code, int quantity, ContentReference currentPageLink)
+        public void AddToCart(string code, int quantity)
         {
             var cart = this._orderRepository.LoadOrCreateCart<ICart>(CustomerContext.Current.CurrentContactId, "Default");
 
@@ -49,10 +49,15 @@
                 .GetDefaultPrice(MarketId.Default, DateTime.Now, new CatalogKey(code), Currency.USD)
                 .UnitPrice
                 .Amount;
-            
+
             cart.AddLineItem(lineItem);
 
             this._orderRepository.Save(cart);
+        }
+
+        public string AddToCart(string code, int quantity, ContentReference currentPageLink)
+        {
+            this.AddToCart(code, quantity);
 
             return this._urlResolver.GetUrl(currentPageLink);
         }
