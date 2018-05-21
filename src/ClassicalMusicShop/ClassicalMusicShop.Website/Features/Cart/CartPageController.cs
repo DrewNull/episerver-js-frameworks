@@ -10,7 +10,7 @@
     public class CartPageController : PageController<CartPage>
     {
         private readonly UrlResolver _urlResolver;
-        public readonly CartService _cartService;
+        private readonly CartService _cartService;
 
         public CartPageController(UrlResolver urlResolver, CartService cartService)
         {
@@ -29,13 +29,9 @@
         [Route(nameof(AddToCart))]
         public ActionResult AddToCart(string code, int quantity, ContentReference currentPageLink)
         {
-            // todo: Add to cart
-
-            string url = this._urlResolver.GetUrl(currentPageLink);
-
             this._cartService.AddToCart(code, quantity);
 
-            return this.Redirect(url);
+            return this.Redirect(this._urlResolver.GetUrl(currentPageLink));
         }
     }
 }
