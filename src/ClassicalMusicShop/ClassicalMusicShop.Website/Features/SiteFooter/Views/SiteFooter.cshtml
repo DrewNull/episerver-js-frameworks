@@ -4,28 +4,38 @@
 <div class="site-footer">
     <div class="grid-container">
         <div class="grid-x">
-            <div class="cell small-12 medium-5 large-3">
+            <div class="cell small-12 medium-3 large-2">
                 @using (Html.BeginForm("SetAppMode", "SiteFooter", FormMethod.Post))
                 {
                     @Html.HiddenFor(x => x.CurrentPageLink)
-                    <p>App Mode:</p>
+                    <p>App Mode</p>
                     <p>@Html.EnumDropDownListFor(x => x.AppMode)</p>
                     <p><input type="submit" value="Submit" class="button" /></p>
                 }
             </div>
-            <div class="cell small-12 medium-5 medium-offset-1 large-3 large-offset-1">
+            <div class="cell small-12 medium-auto medium-offset-1">
+                <p>Example Notes</p>
+                <ul>
+                    <li>MVC example uses no JavaScript</li>
+                    <li>Angular example is a mess :(</li>
+                    <li>Vue example uses <a href="https://vuejs.org/v2/api/#v-pre" target="_blank">v-pre <i class="fi-link"></i></a></li>
+                    <li>React example uses <a href="https://reactjs.org/docs/portals.html" target="_blank">Portals <i class="fi-link"></i></a></li>
+                    <li>Angular and Vue have 3rd party portals too</li>
+                </ul>
+            </div>
+            <div class="cell small-12 medium-12 large-3 large-offset-1">
                 <p>
-                    Links:
+                    Links
                 </p>
                 <ul>
                     <li>
                         <a href="/en/sheet-music/tchaikovsky-pyotr-string-quartet-no3-op30/">
-                            Link to Product Page
+                            Example product page
                         </a>
                     </li>
                     <li>
                         <a href="https://github.com/DrewNull/javascript-episerver-ope" target="_blank">
-                            GitHub Repository
+                            <i class="fi-social-github"></i> GitHub Repository
                         </a>
                     </li>
                     <li>
