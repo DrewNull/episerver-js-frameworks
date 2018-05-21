@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using EPiServer.Core;
     using Images;
+    using Infrastructure.AppMode;
 
     public class SheetMusicViewModel
     {
@@ -11,7 +12,7 @@
             this.Instruments = new List<InstrumentOption>();
         }
 
-        public string AppMode { get; set; }
+        public AppMode AppMode { get; set; }
 
         public ContentReference CurrentPageLink { get; set; }
 

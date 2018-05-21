@@ -1,14 +1,11 @@
 ﻿namespace ClassicalMusicShop.Website.Features.SheetMusic
 {
-    using System;
     using Infrastructure.AppMode;
 
     public static class SheetMusicViewPathHelper
     {
-        public static string GetViewPath(string siteAppMode)
+        public static string GetViewPath(AppMode appMode)
         {
-            Enum.TryParse(siteAppMode, out AppMode appMode);
-
             string pathBase = "~/Features/SheetMusic/Views";
 
             switch (appMode)

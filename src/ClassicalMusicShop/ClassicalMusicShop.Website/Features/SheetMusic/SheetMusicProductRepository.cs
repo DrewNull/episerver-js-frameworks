@@ -1,23 +1,22 @@
 ﻿namespace ClassicalMusicShop.Website.Features.SheetMusic
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using EPiServer;
     using EPiServer.Commerce.Catalog.ContentTypes;
-    using EPiServer.Commerce.Catalog.Linking;
+    using EPiServer.Web.Routing;
 
     public class SheetMusicProductRepository
     {
         private readonly IContentLoader _contentLoader;
-        private readonly IRelationRepository _relationRepository;
+        private readonly UrlResolver _urlResolver;
 
-        public SheetMusicProductRepository(IContentLoader contentLoader, IRelationRepository relationRepository)
+        public SheetMusicProductRepository(IContentLoader contentLoader, UrlResolver urlResolver)
         {
             if (contentLoader == null) throw new ArgumentNullException(nameof(contentLoader));
-            if (relationRepository == null) throw new ArgumentNullException(nameof(relationRepository));
+            if (urlResolver == null) throw new ArgumentNullException(nameof(urlResolver));
             this._contentLoader = contentLoader;
-            this._relationRepository = relationRepository;
+            this._urlResolver = urlResolver;
         }
 
         public SheetMusicProductModel GetParent(SheetMusicVariant childVariant)
@@ -40,16 +39,10 @@
             var model = new SheetMusicProductModel
             {
                 Product = product,
+                Url = this._urlResolver.GetUrl(product.ContentLink), 
             };
 
-            model.Movements.AddRange(this.GetMovements(product));
-
             return model;
-        }
-
-        private IEnumerable<string> GetMovements(SheetMusicProduct product)
-        {
-            return product.MovementList.Split('\n').ToList();
         }
     }
 }

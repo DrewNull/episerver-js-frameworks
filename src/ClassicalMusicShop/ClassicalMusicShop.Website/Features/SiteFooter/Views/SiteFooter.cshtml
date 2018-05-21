@@ -1,7 +1,22 @@
-﻿<div class="site-footer">
+﻿@using ClassicalMusicShop.Website.Infrastructure.AppMode
+@model ClassicalMusicShop.Website.Features.SiteFooter.SiteFooterViewModel
+
+<div class="site-footer">
     <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-            <div class="cell">
+        <div class="grid-x">
+            <div class="cell small-12 medium-5 large-3">
+                @using (Html.BeginForm("SetAppMode", "SiteFooter", FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => x.CurrentPageLink)
+                    <p>App Mode:</p>
+                    <p>@Html.EnumDropDownListFor(x => x.AppMode)</p>
+                    <p><input type="submit" value="Submit" class="button" /></p>
+                }
+            </div>
+            <div class="cell small-12 medium-5 medium-offset-1 large-3 large-offset-1">
+                <p>
+                    Links:
+                </p>
                 <ul>
                     <li>
                         <a href="/en/sheet-music/tchaikovsky-pyotr-string-quartet-no3-op30/">

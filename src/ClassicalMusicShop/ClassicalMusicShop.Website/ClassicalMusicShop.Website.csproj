@@ -302,8 +302,12 @@
     <Compile Include="Features\SheetMusic\InstrumentOption.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicVariantController.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicViewPathHelper.cs" />
+    <Compile Include="Features\SiteFooter\SiteFooterController.cs" />
+    <Compile Include="Features\SiteFooter\SiteFooterService.cs" />
+    <Compile Include="Features\SiteFooter\SiteFooterViewModel.cs" />
     <Compile Include="Infrastructure\AppMode\AppMode.cs" />
     <Compile Include="Infrastructure\AppMode\AppModeSelectionFactory.cs" />
+    <Compile Include="Infrastructure\AppMode\AppModeService.cs" />
     <Compile Include="Infrastructure\DependencyInjection\DependencyResolverInitialization.cs" />
     <Compile Include="Infrastructure\DependencyInjection\StructureMapDependencyResolver.cs" />
     <Compile Include="Infrastructure\Models\SiteBlock.cs" />

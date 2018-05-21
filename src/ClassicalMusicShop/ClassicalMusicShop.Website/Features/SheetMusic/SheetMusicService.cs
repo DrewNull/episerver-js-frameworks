@@ -3,9 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web;
     using EPiServer.Web.Routing;
-    using Home;
     using Images;
+    using Infrastructure.AppMode;
 
     public class SheetMusicService
     {
@@ -14,7 +15,7 @@
         private readonly SheetMusicVariantRepository _sheetMusicVariantRepository;
         private readonly IPageRouteHelper _pageRouteHelper;
         private readonly UrlResolver _urlResolver;
-        private readonly HomePageRepository _homePageRepository;
+        private readonly AppModeService _appModeService;
 
         public SheetMusicService(
             ImageMediaRepository imageMediaRepository, 
@@ -22,30 +23,30 @@
             SheetMusicVariantRepository sheetMusicVariantRepository, 
             IPageRouteHelper pageRouteHelper, 
             UrlResolver urlResolver, 
-            HomePageRepository homePageRepository)
+            AppModeService appModeService)
         {
             if (imageMediaRepository == null) throw new ArgumentNullException(nameof(imageMediaRepository));
             if (sheetMusicProductRepository == null) throw new ArgumentNullException(nameof(sheetMusicProductRepository));
             if (sheetMusicVariantRepository == null) throw new ArgumentNullException(nameof(sheetMusicVariantRepository));
             if (pageRouteHelper == null) throw new ArgumentNullException(nameof(pageRouteHelper));
             if (urlResolver == null) throw new ArgumentNullException(nameof(urlResolver));
-            if (homePageRepository == null) throw new ArgumentNullException(nameof(homePageRepository));
+            if (appModeService == null) throw new ArgumentNullException(nameof(appModeService));
             this._imageMediaRepository = imageMediaRepository;
             this._sheetMusicProductRepository = sheetMusicProductRepository;
             this._sheetMusicVariantRepository = sheetMusicVariantRepository;
             this._pageRouteHelper = pageRouteHelper;
             this._urlResolver = urlResolver;
-            this._homePageRepository = homePageRepository;
+            this._appModeService = appModeService;
         }
 
-        public SheetMusicViewModel GetViewModel(SheetMusicProduct product)
+        public SheetMusicViewModel GetViewModel(SheetMusicProduct product, HttpContextBase httpContext)
         {
             var viewModel = new SheetMusicViewModel
             {
-                AppMode = this.GetAppMode(), 
+                AppMode = this._appModeService.GetAppMode(httpContext), 
                 CurrentPageLink = this._pageRouteHelper.ContentLink,
                 MainImage = this._imageMediaRepository.Get(product.CommerceMediaCollection.FirstOrDefault()?.AssetLink), 
-                ProductModel = this._sheetMusicProductRepository.Get(product), 
+                ProductModel = this._sheetMusicProductRepository.Get(product),
                 VariantModel = null
             };
 
@@ -54,13 +55,13 @@
             return viewModel;
         }
 
-        public SheetMusicViewModel GetViewModel(SheetMusicVariant variant)
+        public SheetMusicViewModel GetViewModel(SheetMusicVariant variant, HttpContextBase httpContext)
         {
             var productModel = this._sheetMusicProductRepository.GetParent(variant);
 
             var viewModel = new SheetMusicViewModel
             {
-                AppMode = this.GetAppMode(),
+                AppMode = this._appModeService.GetAppMode(httpContext),
                 CurrentPageLink = this._pageRouteHelper.ContentLink,
                 MainImage = this._imageMediaRepository.Get(variant.CommerceMediaCollection.FirstOrDefault()?.AssetLink),
                 ProductModel = productModel,
@@ -86,13 +87,6 @@
                 .ToList();
 
             return instruments;
-        }
-
-        private string GetAppMode()
-        {
-            var homePage = this._homePageRepository.Get();
-
-            return homePage.AppMode;
         }
     }
 }

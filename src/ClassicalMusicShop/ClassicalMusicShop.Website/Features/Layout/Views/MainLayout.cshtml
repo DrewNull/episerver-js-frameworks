@@ -14,7 +14,7 @@
     <div class="page-content">
         @RenderBody()
     </div>
-    @Html.Partial("~/Features/SiteFooter/Views/SiteFooter.cshtml")
+    @Html.Action("Render", "SiteFooter")
     <script src="~/Static/libs/jquery.min.js"></script>
     <script src="~/Static/libs/foundation.min.js"></script>
     <script>
