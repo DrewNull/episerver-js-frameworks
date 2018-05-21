@@ -3,6 +3,8 @@
     using System;
     using System.Linq;
     using EPiServer.Commerce.Order;
+    using EPiServer.Core;
+    using EPiServer.Web.Routing;
     using Mediachase.Commerce;
     using Mediachase.Commerce.Catalog;
     using Mediachase.Commerce.Customers;
@@ -14,20 +16,28 @@
         private readonly IOrderGroupFactory _orderGroupFactory;
         private readonly IPriceService _priceService;
         private readonly IOrderGroupCalculator _orderGroupCalculator;
+        private readonly UrlResolver _urlResolver;
 
-        public CartService(IOrderRepository orderRepository, IOrderGroupFactory orderGroupFactory, IPriceService priceService, IOrderGroupCalculator orderGroupCalculator)
+        public CartService(
+            IOrderRepository orderRepository, 
+            IOrderGroupFactory orderGroupFactory, 
+            IPriceService priceService, 
+            IOrderGroupCalculator orderGroupCalculator, 
+            UrlResolver urlResolver)
         {
             if (orderRepository == null) throw new ArgumentNullException(nameof(orderRepository));
             if (orderGroupFactory == null) throw new ArgumentNullException(nameof(orderGroupFactory));
             if (priceService == null) throw new ArgumentNullException(nameof(priceService));
             if (orderGroupCalculator == null) throw new ArgumentNullException(nameof(orderGroupCalculator));
+            if (urlResolver == null) throw new ArgumentNullException(nameof(urlResolver));
             this._orderRepository = orderRepository;
             this._orderGroupFactory = orderGroupFactory;
             this._priceService = priceService;
             this._orderGroupCalculator = orderGroupCalculator;
+            this._urlResolver = urlResolver;
         }
 
-        public void AddToCart(string code, int quantity)
+        public string AddToCart(string code, int quantity, ContentReference currentPageLink)
         {
             var cart = this._orderRepository.LoadOrCreateCart<ICart>(CustomerContext.Current.CurrentContactId, "Default");
 
@@ -43,6 +53,8 @@
             cart.AddLineItem(lineItem);
 
             this._orderRepository.Save(cart);
+
+            return this._urlResolver.GetUrl(currentPageLink);
         }
 
         public CartPreviewViewModel GetCartPreview()

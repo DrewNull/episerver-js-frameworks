@@ -2,22 +2,21 @@
 {
     using System;
     using System.Web.Mvc;
-    using EPiServer.Core;
     using EPiServer.Web.Mvc;
-    using EPiServer.Web.Routing;
+    using Infrastructure.AppMode;
 
     [Route(nameof(CartPage))]
     public class CartPageController : PageController<CartPage>
     {
-        private readonly UrlResolver _urlResolver;
         private readonly CartService _cartService;
+        private readonly AppModeService _appModeService;
 
-        public CartPageController(UrlResolver urlResolver, CartService cartService)
+        public CartPageController(CartService cartService, AppModeService appModeService)
         {
-            if (urlResolver == null) throw new ArgumentNullException(nameof(urlResolver));
             if (cartService == null) throw new ArgumentNullException(nameof(cartService));
-            this._urlResolver = urlResolver;
+            if (appModeService == null) throw new ArgumentNullException(nameof(appModeService));
             this._cartService = cartService;
+            this._appModeService = appModeService;
         }
 
         public  ActionResult Index(CartPage currentPage)
@@ -27,17 +26,21 @@
 
         [HttpPost]
         [Route(nameof(AddToCart))]
-        public ActionResult AddToCart(string code, int quantity, ContentReference currentPageLink)
+        public ActionResult AddToCart(AddToCartInputModel addToCartInputModel)
         {
-            this._cartService.AddToCart(code, quantity);
-
-            return this.Redirect(this._urlResolver.GetUrl(currentPageLink));
+            return this.Redirect(
+                this._cartService.AddToCart(
+                    addToCartInputModel.Code, 
+                    addToCartInputModel.Quantity, 
+                    addToCartInputModel.CurrentPageLink));
         }
 
         [Route(nameof(CartPreview))]
         public ActionResult CartPreview()
         {
-            return this.View("~/Features/Cart/Views/CartPreview.cshtml", this._cartService.GetCartPreview());
+            return this.View(
+                CartPreviewViewPathHelper.GetViewPath(this._appModeService.GetAppMode(this.HttpContext)), 
+                this._cartService.GetCartPreview());
         }
     }
 }

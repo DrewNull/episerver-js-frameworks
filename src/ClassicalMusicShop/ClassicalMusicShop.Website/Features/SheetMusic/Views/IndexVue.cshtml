@@ -1,8 +1,124 @@
-﻿@model ClassicalMusicShop.Website.Features.SheetMusic.SheetMusicProduct
+﻿@model ClassicalMusicShop.Website.Features.SheetMusic.SheetMusicViewModel
 @{
-    Layout = "~/Features/Layout/Views/MainLayoutVue.cshtml";
+    Layout = "~/Features/Layout/Views/MainLayout.cshtml";
 }
+<div class="grid-container">
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-12 medium-6 large-5">
+            @if (Model.MainImage != null)
+            {
+                <img class="thumbnail" src="@Model.MainImage.Url" alt="@Model.MainImage.Media.Title" />
+            }
+        </div>
+        <div class="cell small-12 medium-6 large-6 large-offset-1">
+            <nav>
+                <ul class="breadcrumbs">
+                    <li>
+                        <a href="/"><i class="fi-home"></i></a>
+                    </li>
+                    <li>
+                        <a href="/sheet-music">Sheet Music</a>
+                    </li>
+                </ul>
+            </nav>
 
-<div>
-    <h1>Sheet Music Product</h1>
+            <h4 @Html.EditAttributes(x => x.ProductModel.Product.DisplayName)>
+                @Model.ProductModel.Product.DisplayName
+            </h4>
+
+            <hr />
+
+            <p>Instrument:</p>
+            <p class="expanded button-group">
+                @foreach (var variantOption in Model.Instruments)
+                {
+                    if (variantOption.IsSelected)
+                    {
+
+                        <a href="@Model.ProductModel.Url" class="button">
+                            @variantOption.Text
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@variantOption.Url" class="button secondary">
+                            @variantOption.Text
+                        </a>
+                    }
+                }
+            </p>
+
+            @if (Model.HasVariant)
+            {
+                <h4>
+                    @Model.VariantModel.Price.ToString("C")
+                </h4>
+                <p @Html.EditAttributes(x => x.VariantModel.Variant.Code)>
+                    @Model.VariantModel.Variant.Code
+                </p>
+            }
+
+            @if (Model.HasVariant)
+            {
+                using (Html.BeginForm("AddToCart", "CartPage", FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => Model.AddToCartInputModel.Code)
+                    @Html.HiddenFor(x => Model.AddToCartInputModel.CurrentPageLink)
+                    <p>Quantity:</p>
+                    <p>
+                        @Html.DropDownListFor(x => Model.AddToCartInputModel.Quantity, Model.AddToCartQuantities)
+                    </p>
+                    <p>
+                        <input class="button large" type="submit" value="Add to Cart" />
+                    </p>
+                }
+            }
+
+            <hr />
+
+            <h5>Details</h5>
+            <table>
+                <tr>
+                    <td>Composer</td>
+                    <td>
+                        <div @Html.EditAttributes(x => x.ProductModel.Product.Composer)>
+                            @Model.ProductModel.Product.Composer
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Opus</td>
+                    <td>
+                        <div @Html.EditAttributes(x => x.ProductModel.Product.Opus)>
+                            Op.@Model.ProductModel.Product.Opus
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Key</td>
+                    <td>
+                        <div @Html.EditAttributes(x => x.ProductModel.Product.Key)>
+                            @Model.ProductModel.Product.Key
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Movements</td>
+                    <td>
+                        <div @Html.EditAttributes(x => x.ProductModel.Product.MovementList)>
+                            @Html.Raw(Model.ProductModel.Product.MovementList.Replace("\n", "<br />"))
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Year</td>
+                    <td>
+                        <div @Html.EditAttributes(x => x.ProductModel.Product.YearComposed)>
+                            @Model.ProductModel.Product.YearComposed
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

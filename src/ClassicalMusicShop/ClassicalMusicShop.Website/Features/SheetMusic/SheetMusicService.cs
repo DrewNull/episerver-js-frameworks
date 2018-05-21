@@ -3,10 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
+    using System.Web.Mvc;
     using EPiServer.Web.Routing;
     using Images;
-    using Infrastructure.AppMode;
 
     public class SheetMusicService
     {
@@ -15,62 +14,70 @@
         private readonly SheetMusicVariantRepository _sheetMusicVariantRepository;
         private readonly IPageRouteHelper _pageRouteHelper;
         private readonly UrlResolver _urlResolver;
-        private readonly AppModeService _appModeService;
 
         public SheetMusicService(
             ImageMediaRepository imageMediaRepository, 
             SheetMusicProductRepository sheetMusicProductRepository, 
             SheetMusicVariantRepository sheetMusicVariantRepository, 
             IPageRouteHelper pageRouteHelper, 
-            UrlResolver urlResolver, 
-            AppModeService appModeService)
+            UrlResolver urlResolver)
         {
             if (imageMediaRepository == null) throw new ArgumentNullException(nameof(imageMediaRepository));
             if (sheetMusicProductRepository == null) throw new ArgumentNullException(nameof(sheetMusicProductRepository));
             if (sheetMusicVariantRepository == null) throw new ArgumentNullException(nameof(sheetMusicVariantRepository));
             if (pageRouteHelper == null) throw new ArgumentNullException(nameof(pageRouteHelper));
             if (urlResolver == null) throw new ArgumentNullException(nameof(urlResolver));
-            if (appModeService == null) throw new ArgumentNullException(nameof(appModeService));
             this._imageMediaRepository = imageMediaRepository;
             this._sheetMusicProductRepository = sheetMusicProductRepository;
             this._sheetMusicVariantRepository = sheetMusicVariantRepository;
             this._pageRouteHelper = pageRouteHelper;
             this._urlResolver = urlResolver;
-            this._appModeService = appModeService;
         }
 
-        public SheetMusicViewModel GetViewModel(SheetMusicProduct product, HttpContextBase httpContext)
+        public SheetMusicViewModel GetViewModel(SheetMusicProduct product)
         {
             var viewModel = new SheetMusicViewModel
             {
-                AppMode = this._appModeService.GetAppMode(httpContext), 
-                CurrentPageLink = this._pageRouteHelper.ContentLink,
                 MainImage = this._imageMediaRepository.Get(product.CommerceMediaCollection.FirstOrDefault()?.AssetLink), 
                 ProductModel = this._sheetMusicProductRepository.Get(product),
-                VariantModel = null
+                VariantModel = null, 
             };
 
             viewModel.Instruments.AddRange(this.GetInstruments(product));
+            viewModel.AddToCartQuantities.AddRange(this.GetQuantities());
 
             return viewModel;
         }
 
-        public SheetMusicViewModel GetViewModel(SheetMusicVariant variant, HttpContextBase httpContext)
+        public SheetMusicViewModel GetViewModel(SheetMusicVariant variant)
         {
             var productModel = this._sheetMusicProductRepository.GetParent(variant);
 
             var viewModel = new SheetMusicViewModel
             {
-                AppMode = this._appModeService.GetAppMode(httpContext),
-                CurrentPageLink = this._pageRouteHelper.ContentLink,
                 MainImage = this._imageMediaRepository.Get(variant.CommerceMediaCollection.FirstOrDefault()?.AssetLink),
                 ProductModel = productModel,
                 VariantModel = this._sheetMusicVariantRepository.Get(variant), 
             };
 
             viewModel.Instruments.AddRange(this.GetInstruments(productModel.Product, variant.Code));
+            viewModel.AddToCartQuantities.AddRange(this.GetQuantities());
+            viewModel.AddToCartInputModel.Quantity = 1;
+            viewModel.AddToCartInputModel.Code = variant.Code;
+            viewModel.AddToCartInputModel.CurrentPageLink = this._pageRouteHelper.ContentLink;
 
             return viewModel;
+        }
+
+        private IEnumerable<SelectListItem> GetQuantities()
+        {
+            var quantities = Enumerable
+                .Range(1, 9)
+                .Select(x => x.ToString())
+                .Select(x => new SelectListItem { Text = x, Value = x })
+                .ToList();
+
+            return quantities;
         }
 
         private IEnumerable<InstrumentOption> GetInstruments(SheetMusicProduct product, string selectedVariantCode = null)
