@@ -1,5 +1,82 @@
 ﻿@import "_main-common.scss";
 
 body {
-    color: maroon;
+    background-color: #ddd;
+    padding: 1px;
 }
+
+.site-header {
+    clear: right;
+    margin-bottom: 1px;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.site-header__hamburger {
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.site-header__hamburger-link {
+    position: relative;
+    display: block;
+    line-height: 4.5rem;
+    width: 4.5rem;
+    text-align: center;
+}
+
+.site-header__main {
+    background-color: #fff;
+    margin-left: calc(4.5rem + 1px);
+    overflow: hidden;
+}
+
+.site-header__company-link {
+    float: left;
+    display: block;
+    line-height: 1.5rem;
+    padding: 1.5rem;
+    white-space: nowrap;
+}
+
+.cart-preview {
+    float: right;
+}
+
+.cart-preview__link {
+    display: block;
+    padding: 0 1.5rem;
+}
+
+.cart-preview__icon, 
+.cart-preview__count, 
+.cart-preview__amount {
+    display: inline-block;
+    font-size: 1.5rem;
+    line-height: 4.5rem;
+}
+
+.page-content {
+    background-color: #fff;
+    padding: 3rem;
+}
+
+.site-footer {
+    background-color: #fff;
+    margin-top: 1px;
+    padding: 3rem;
+}
+
+.site-footer ul {
+    display: block;
+    list-style-type: none;
+    text-align: center;
+}
+
+.site-footer li {
+    display: inline-block;
+    padding: 0 3rem;
+}
+

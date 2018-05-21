@@ -2,10 +2,11 @@
 @{
     Layout = "~/Features/Layout/Views/MainLayout.cshtml";
 }
-<div>
-    <div>
+<div class="grid-container">
+    <div class="grid-x grid-padding-x">
+
         @* media *@
-        <div>
+        <div class="cell small-6">
             @if (Model.MainImage != null)
             {
                 <img src="@Model.MainImage.Url" alt="@Model.MainImage.Media.Title" />
@@ -13,15 +14,25 @@
         </div>
 
         @* product *@
-        <div>
-            <div @Html.EditAttributes(x => x.ProductModel.Product.DisplayName)>
-                <h1>@Model.ProductModel.Product.DisplayName</h1>
+        <div class="cell small-6">
+
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    <div>
+                        <a href="/">Home</a>
+                        /
+                        <a href="/sheet-music">Sheet Music</a>
+                    </div>
+                    <h1 @Html.EditAttributes(x => x.ProductModel.Product.DisplayName)>
+                        @Model.ProductModel.Product.DisplayName
+                    </h1>
+                </div>
             </div>
 
-            <div>
+            <div class="grid-x grid-padding-x">
 
                 @* variant *@
-                <div>
+                <div class="cell">
 
                     @if (Model.HasVariant)
                     {
@@ -38,16 +49,14 @@
                     <div>
                         <div>Instrument</div>
                         <div>
-                            <ul>
+                            <div class="expanded button-group">
                                 @foreach (var variantOption in Model.Instruments)
                                 {
-                                    <li class="@(variantOption.IsSelected ? "active" : "")">
-                                        <a href="@variantOption.Url">
-                                            @variantOption.Text
-                                        </a>
-                                    </li>
+                                    <a href="@variantOption.Url" class="button @(!variantOption.IsSelected ? "secondary" : "")">
+                                        @variantOption.Text
+                                    </a>
                                 }
-                            </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -81,7 +90,7 @@
                 </div>
 
                 @* details *@
-                <div>
+                <div class="cell">
                     <h2>Details</h2>
                     <div>
                         <table>
@@ -113,12 +122,10 @@
                                 <td>Movements</td>
                                 <td>
                                     <div @Html.EditAttributes(x => x.ProductModel.Product.MovementList)>
-                                        <ul>
-                                            @foreach (var movement in Model.ProductModel.Movements)
-                                            {
-                                                <li>@movement</li>
-                                            }
-                                        </ul>
+                                        @foreach (var movement in Model.ProductModel.Movements)
+                                        {
+                                            <div>@movement</div>
+                                        }
                                     </div>
                                 </td>
                             </tr>

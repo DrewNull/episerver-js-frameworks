@@ -33,5 +33,11 @@
 
             return this.Redirect(this._urlResolver.GetUrl(currentPageLink));
         }
+
+        [Route(nameof(CartPreview))]
+        public ActionResult CartPreview()
+        {
+            return this.View("~/Features/Cart/Views/CartPreview.cshtml", this._cartService.GetCartPreview());
+        }
     }
 }
