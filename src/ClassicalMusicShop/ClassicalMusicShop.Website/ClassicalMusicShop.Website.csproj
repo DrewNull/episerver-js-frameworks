@@ -298,6 +298,8 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
+    <Compile Include="Features\Home\HomePageRepository.cs" />
+    <Compile Include="Features\SheetMusic\InstrumentOption.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicVariantController.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicViewPathHelper.cs" />
     <Compile Include="Infrastructure\AppMode\AppMode.cs" />

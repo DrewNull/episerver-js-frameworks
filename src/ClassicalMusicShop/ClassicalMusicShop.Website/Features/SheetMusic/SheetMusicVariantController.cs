@@ -16,7 +16,7 @@
 
         public ActionResult Index(SheetMusicVariant currentContent)
         {
-            var viewModel = this._sheetMusicService.Get(currentContent);
+            var viewModel = this._sheetMusicService.GetViewModel(currentContent);
 
             return this.View(
                 SheetMusicViewPathHelper.GetViewPath(viewModel.AppMode), 
