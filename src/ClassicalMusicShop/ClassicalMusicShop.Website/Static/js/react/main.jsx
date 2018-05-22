@@ -12,7 +12,10 @@ ReactDOM.render(
     $('[cms-cart-preview]')[0]);
 
 ReactDOM.render(
-    <SheetMusicPage cartService={cartService} imageSelector="[cms-sheet-music-page-image]" variantSelector="[cms-sheet-music-page-variant]" />,
+    <SheetMusicPage
+        cartService={cartService}
+        imageSelector="[cms-sheet-music-page-image]"
+        variantSelector="[cms-sheet-music-page-variant]" />,
     $('[cms-sheet-music-page]')[0]);
 
 cartService.gettingPreview();
