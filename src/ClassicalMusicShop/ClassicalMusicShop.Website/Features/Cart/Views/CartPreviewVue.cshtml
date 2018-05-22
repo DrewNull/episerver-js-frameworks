@@ -1,15 +1,14 @@
 ﻿@model ClassicalMusicShop.Website.Features.Cart.CartPreviewViewModel
-<div class="cart-preview">
+<div cms-cart-preview class="cart-preview">
     <a href="#" class="cart-preview__link">
         <i class="fi-shopping-cart cart-preview__icon"></i>
-        @if (Model.Count > 0)
-        {
+        <span style="display:none" v-show="hasItems()">
             <span class="cart-preview__count">
-                (@Model.Count)
+                ({{ count }})
             </span>
             <span class="cart-preview__amount">
-                @Model.Amount
+                {{ amount }}
             </span>
-        }
+        </span>
     </a>
 </div>

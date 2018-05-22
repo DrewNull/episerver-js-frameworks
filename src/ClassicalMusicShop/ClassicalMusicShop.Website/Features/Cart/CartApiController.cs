@@ -24,5 +24,14 @@
 
             return preview;
         }
+
+        [HttpGet]
+        [Route("get-preview")]
+        public CartPreviewViewModel GetPreview()
+        {
+            var preview = this._cartService.GetCartPreview();
+
+            return preview;
+        }
     }
 }

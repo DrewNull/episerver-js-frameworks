@@ -13,38 +13,47 @@
         private readonly SheetMusicProductRepository _sheetMusicProductRepository;
         private readonly SheetMusicVariantRepository _sheetMusicVariantRepository;
         private readonly IPageRouteHelper _pageRouteHelper;
-        private readonly UrlResolver _urlResolver;
 
         public SheetMusicService(
             ImageMediaRepository imageMediaRepository, 
             SheetMusicProductRepository sheetMusicProductRepository, 
             SheetMusicVariantRepository sheetMusicVariantRepository, 
-            IPageRouteHelper pageRouteHelper, 
-            UrlResolver urlResolver)
+            IPageRouteHelper pageRouteHelper)
         {
             if (imageMediaRepository == null) throw new ArgumentNullException(nameof(imageMediaRepository));
             if (sheetMusicProductRepository == null) throw new ArgumentNullException(nameof(sheetMusicProductRepository));
             if (sheetMusicVariantRepository == null) throw new ArgumentNullException(nameof(sheetMusicVariantRepository));
             if (pageRouteHelper == null) throw new ArgumentNullException(nameof(pageRouteHelper));
-            if (urlResolver == null) throw new ArgumentNullException(nameof(urlResolver));
             this._imageMediaRepository = imageMediaRepository;
             this._sheetMusicProductRepository = sheetMusicProductRepository;
             this._sheetMusicVariantRepository = sheetMusicVariantRepository;
             this._pageRouteHelper = pageRouteHelper;
-            this._urlResolver = urlResolver;
         }
 
         public SheetMusicViewModel GetViewModel(SheetMusicProduct product)
         {
             var viewModel = new SheetMusicViewModel
             {
-                MainImage = this._imageMediaRepository.Get(product.CommerceMediaCollection.FirstOrDefault()?.AssetLink), 
-                ProductModel = this._sheetMusicProductRepository.Get(product),
-                VariantModel = null, 
+                ProductViewModel = new SheetMusicProductViewModel
+                {
+                    ProductModel = this._sheetMusicProductRepository.Get(product), 
+                    MainImageModel = this._imageMediaRepository.GetMainImage(product), 
+                }
             };
 
-            viewModel.Instruments.AddRange(this.GetInstruments(product));
             viewModel.AddToCartQuantities.AddRange(this.GetQuantities());
+            viewModel.VariantViewModels.AddRange(this._sheetMusicVariantRepository.GetChildren(product).Select(this.Create).ToList());
+
+            return viewModel;
+        }
+
+        public SheetMusicVariantViewModel Create(SheetMusicVariantModel model)
+        {
+            var viewModel = new SheetMusicVariantViewModel
+            {
+                VariantModel = model, 
+                MainImageModel = this._imageMediaRepository.GetMainImage(model.Variant)
+            };
 
             return viewModel;
         }
@@ -55,16 +64,19 @@
 
             var viewModel = new SheetMusicViewModel
             {
-                MainImage = this._imageMediaRepository.Get(variant.CommerceMediaCollection.FirstOrDefault()?.AssetLink),
-                ProductModel = productModel,
-                VariantModel = this._sheetMusicVariantRepository.Get(variant), 
+                ProductViewModel = new SheetMusicProductViewModel
+                {
+                    ProductModel = productModel,
+                    MainImageModel = this._imageMediaRepository.GetMainImage(productModel.Product)
+                },
+                SelectedVariantCode = variant.Code, 
             };
 
-            viewModel.Instruments.AddRange(this.GetInstruments(productModel.Product, variant.Code));
             viewModel.AddToCartQuantities.AddRange(this.GetQuantities());
             viewModel.AddToCartInputModel.Quantity = 1;
             viewModel.AddToCartInputModel.Code = variant.Code;
             viewModel.AddToCartInputModel.CurrentPageLink = this._pageRouteHelper.ContentLink;
+            viewModel.VariantViewModels.AddRange(this._sheetMusicVariantRepository.GetChildren(productModel.Product).Select(this.Create));
 
             return viewModel;
         }
@@ -78,22 +90,6 @@
                 .ToList();
 
             return quantities;
-        }
-
-        private IEnumerable<InstrumentOption> GetInstruments(SheetMusicProduct product, string selectedVariantCode = null)
-        {
-            var variants = this._sheetMusicVariantRepository.GetChildren(product);
-
-            var instruments = variants
-                    .Select(x => new InstrumentOption
-                {
-                    Url = this._urlResolver.GetUrl(x.Variant.ContentLink), 
-                    Text = x.Variant.Instrument, 
-                    IsSelected = string.Equals(selectedVariantCode, x.Variant.Code, StringComparison.InvariantCultureIgnoreCase), 
-                })
-                .ToList();
-
-            return instruments;
         }
     }
 }

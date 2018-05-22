@@ -1,7 +1,9 @@
 ﻿namespace ClassicalMusicShop.Website.Features.Images
 {
     using System;
+    using System.Linq;
     using EPiServer;
+    using EPiServer.Commerce.Catalog.ContentTypes;
     using EPiServer.Core;
     using EPiServer.Web.Routing;
 
@@ -27,6 +29,11 @@
             };
 
             return model;
+        }
+
+        public ImageMediaModel GetMainImage(EntryContentBase entryContent)
+        {
+            return this.Get(entryContent.CommerceMediaCollection.FirstOrDefault()?.AssetLink);
         }
     }
 }

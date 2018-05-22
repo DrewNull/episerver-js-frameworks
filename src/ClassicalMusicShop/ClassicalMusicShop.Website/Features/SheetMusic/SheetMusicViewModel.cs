@@ -1,6 +1,7 @@
 ﻿namespace ClassicalMusicShop.Website.Features.SheetMusic
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using Cart;
     using Images;
@@ -9,20 +10,26 @@
     {
         public SheetMusicViewModel()
         {
-            this.Instruments = new List<InstrumentOption>();
             this.AddToCartQuantities = new List<SelectListItem>();
             this.AddToCartInputModel = new AddToCartInputModel();
+            this.VariantViewModels = new List<SheetMusicVariantViewModel>();
         }
 
-        public ImageMediaModel MainImage { get; set; }
+        public ImageMediaModel MainImage => 
+            this.HasVariant 
+                ? this.SelectedVariantViewModel.MainImageModel 
+                : this.ProductViewModel.MainImageModel;
 
-        public SheetMusicProductModel ProductModel { get; set; }
+        public string SelectedVariantCode { get; set; }
 
-        public SheetMusicVariantModel VariantModel { get; set; }
+        public SheetMusicProductViewModel ProductViewModel { get; set; }
 
-        public List<InstrumentOption> Instruments { get; }
+        public SheetMusicVariantViewModel SelectedVariantViewModel =>
+            this.VariantViewModels.FirstOrDefault(x => x.VariantModel.Variant.Code == this.SelectedVariantCode);
 
-        public bool HasVariant => this.VariantModel != null;
+        public List<SheetMusicVariantViewModel> VariantViewModels { get; }
+
+        public bool HasVariant => this.SelectedVariantViewModel != null;
 
         public List<SelectListItem> AddToCartQuantities { get; }
 

@@ -8,9 +8,11 @@
 }
 
 @Html.Partial("~/Features/SiteHeader/Views/SiteHeader.cshtml")
+
 <div class="page-content">
     @RenderBody()
 </div>
+
 @Html.Action("Render", "SiteFooter")
 
 @section FooterScripts

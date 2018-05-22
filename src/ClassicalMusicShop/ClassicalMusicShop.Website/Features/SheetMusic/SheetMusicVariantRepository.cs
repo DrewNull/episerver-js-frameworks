@@ -6,6 +6,7 @@
     using EPiServer;
     using EPiServer.Commerce.Catalog.ContentTypes;
     using EPiServer.Commerce.Catalog.Linking;
+    using EPiServer.Web.Routing;
     using Mediachase.Commerce;
     using Mediachase.Commerce.Catalog;
     using Mediachase.Commerce.Pricing;
@@ -15,15 +16,22 @@
         private readonly IContentLoader _contentLoader;
         private readonly IRelationRepository _relationRepository;
         private readonly IPriceService _priceService;
+        private readonly UrlResolver _urlResolver;
 
-        public SheetMusicVariantRepository(IContentLoader contentLoader, IRelationRepository relationRepository, IPriceService priceService)
+        public SheetMusicVariantRepository(
+            IContentLoader contentLoader, 
+            IRelationRepository relationRepository, 
+            IPriceService priceService, 
+            UrlResolver urlResolver)
         {
             if (contentLoader == null) throw new ArgumentNullException(nameof(contentLoader));
             if (relationRepository == null) throw new ArgumentNullException(nameof(relationRepository));
             if (priceService == null) throw new ArgumentNullException(nameof(priceService));
+            if (urlResolver == null) throw new ArgumentNullException(nameof(urlResolver));
             this._contentLoader = contentLoader;
             this._relationRepository = relationRepository;
             this._priceService = priceService;
+            this._urlResolver = urlResolver;
         }
 
         public SheetMusicVariantModel Get(SheetMusicVariant variant)
@@ -50,7 +58,8 @@
             return new SheetMusicVariantModel
             {
                 Variant = variant,
-                Price = this.GetPrice(variant)
+                Price = this.GetPrice(variant), 
+                Url = this._urlResolver.GetUrl(variant.ContentLink)
             };
         }
 

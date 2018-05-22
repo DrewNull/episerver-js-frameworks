@@ -311,8 +311,9 @@
   <ItemGroup>
     <Compile Include="Features\Cart\CartPreviewViewPathHelper.cs" />
     <Compile Include="Features\Home\HomePageRepository.cs" />
-    <Compile Include="Features\SheetMusic\InstrumentOption.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicProductViewModel.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicVariantController.cs" />
+    <Compile Include="Features\SheetMusic\SheetMusicVariantViewModel.cs" />
     <Compile Include="Features\SheetMusic\SheetMusicViewPathHelper.cs" />
     <Compile Include="Features\SiteFooter\SiteFooterController.cs" />
     <Compile Include="Features\SiteFooter\SiteFooterService.cs" />
@@ -370,7 +371,6 @@
     <Folder Include="Static\dist\" />
     <Folder Include="Static\js\angular\" />
     <Folder Include="Static\js\react\" />
-    <Folder Include="Static\js\vue\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -378,6 +378,9 @@
     <Content Include="Static\js\main-react.js" />
     <Content Include="Static\js\main-vue.js" />
     <Content Include="Static\js\main-angular.js" />
+    <Content Include="Static\js\vue\cartPreview.js" />
+    <Content Include="Static\js\vue\sheetMusicPage.js" />
+    <Content Include="Static\js\vue\vueInitialization.js" />
     <Content Include="Static\libs\foundation-icons\foundation-icons.css" />
     <Content Include="Static\libs\foundation-icons\foundation-icons.svg" />
     <Content Include="Static\libs\foundation-icons\preview.html" />
@@ -666,6 +669,7 @@
     <Content Include="Static\libs\foundation-icons\svgs\fi-zoom-out.svg" />
     <Content Include="Static\libs\foundation.min.js" />
     <Content Include="Static\libs\jquery.min.js" />
+    <Content Include="Static\libs\vue.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

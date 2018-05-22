@@ -13,5 +13,10 @@
         filename: '[name].js', 
         path: __dirname + '/static/dist',
         libraryExport: 'commonjs-module'
+    }, 
+    resolve: {
+        alias: {
+            'vue': 'vue/dist/vue.esm.js'
+        }
     }
 };
