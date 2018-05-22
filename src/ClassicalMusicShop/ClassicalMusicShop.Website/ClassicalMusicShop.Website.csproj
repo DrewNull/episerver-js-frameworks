@@ -379,6 +379,9 @@
     <Content Include="Static\js\main-angular.js" />
     <Content Include="Static\js\react\cartPreview.jsx" />
     <Content Include="Static\js\react\main.jsx" />
+    <Content Include="Static\js\react\sheetMusicPage.jsx" />
+    <Content Include="Static\js\react\sheetMusicPageImage.jsx" />
+    <Content Include="Static\js\react\sheetMusicPageVariant.jsx" />
     <Content Include="Static\js\vue\cartPreview.js" />
     <Content Include="Static\js\vue\sheetMusicPage.js" />
     <Content Include="Static\libs\foundation-icons\foundation-icons.css" />
