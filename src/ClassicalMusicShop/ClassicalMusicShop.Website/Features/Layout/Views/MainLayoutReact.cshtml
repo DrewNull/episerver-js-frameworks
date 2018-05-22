@@ -9,6 +9,8 @@
 
 @Html.Partial("~/Features/SiteHeader/Views/SiteHeader.cshtml")
 
+<div cms-app></div>
+
 <div class="page-content">
     @RenderBody()
 </div>
@@ -17,5 +19,5 @@
 
 @section FooterScripts
 {
-    <script src="~/Static/js/main-react.js"></script>
+    <script src="~/Static/dist/main-react.js"></script>
 }

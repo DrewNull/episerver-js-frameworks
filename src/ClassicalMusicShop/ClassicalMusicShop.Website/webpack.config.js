@@ -10,9 +10,20 @@
         vue: 'Vue'
     },
     mode: 'development',
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader']
+            }
+        ]
+    },
     output: {
         filename: '[name].js', 
-        path: __dirname + '/static/dist',
-        libraryExport: 'commonjs-module'
+        path: __dirname + '/static/dist'
+    }, 
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
     }
 };

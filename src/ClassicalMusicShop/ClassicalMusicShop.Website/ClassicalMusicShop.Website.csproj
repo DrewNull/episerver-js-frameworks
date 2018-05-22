@@ -370,7 +370,6 @@
     <Folder Include="Static\css\original\" />
     <Folder Include="Static\dist\" />
     <Folder Include="Static\js\angular\" />
-    <Folder Include="Static\js\react\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -378,6 +377,8 @@
     <Content Include="Static\js\main-react.js" />
     <Content Include="Static\js\main-vue.js" />
     <Content Include="Static\js\main-angular.js" />
+    <Content Include="Static\js\react\cartPreview.jsx" />
+    <Content Include="Static\js\react\main.jsx" />
     <Content Include="Static\js\vue\cartPreview.js" />
     <Content Include="Static\js\vue\sheetMusicPage.js" />
     <Content Include="Static\libs\foundation-icons\foundation-icons.css" />
