@@ -6,17 +6,13 @@
         'main-vue': ['./static/js/main-vue.js']
     }, 
     externals: {
-        jquery: 'jQuery'
+        jquery: 'jQuery', 
+        vue: 'Vue'
     },
     mode: 'development',
     output: {
         filename: '[name].js', 
         path: __dirname + '/static/dist',
         libraryExport: 'commonjs-module'
-    }, 
-    resolve: {
-        alias: {
-            'vue': 'vue/dist/vue.esm.js'
-        }
     }
 };
