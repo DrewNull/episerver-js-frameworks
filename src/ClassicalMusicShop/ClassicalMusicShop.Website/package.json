@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "css-build": "node-sass static/css -o static/dist",
     "css-watch": "npm run css-build && npm run css-build -- -w",
-    "js-build": "webpack --config webpack.config.js",
+    "js-build": "webpack --config webpack.config.js --display-error-details",
     "js-watch": "npm run js-build -- --watch"
   },
   "author": "",

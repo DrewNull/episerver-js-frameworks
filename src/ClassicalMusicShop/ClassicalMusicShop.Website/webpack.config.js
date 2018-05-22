@@ -5,9 +5,13 @@
         'main-react': ['./static/js/main-react.js'],
         'main-vue': ['./static/js/main-vue.js']
     }, 
+    externals: {
+        jquery: 'jQuery'
+    },
     mode: 'development',
     output: {
         filename: '[name].js', 
-        path: __dirname + '/static/dist'
+        path: __dirname + '/static/dist',
+        libraryExport: 'commonjs-module'
     }
 };

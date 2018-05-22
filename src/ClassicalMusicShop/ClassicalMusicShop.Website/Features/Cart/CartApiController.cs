@@ -3,7 +3,7 @@
     using System;
     using System.Web.Http;
 
-    [Route("api/cart")]
+    [RoutePrefix("api/cart")]
     public class CartApiController : ApiController
     {
         private readonly CartService _cartService;
@@ -16,9 +16,9 @@
 
         [HttpPost]
         [Route("add-to-cart")]
-        public CartPreviewViewModel AddToCart(AddToCartInputModel addToCartInputModel)
+        public CartPreviewViewModel AddToCart([FromBody]AddToCartInputModel inputModel)
         {
-            this._cartService.AddToCart(addToCartInputModel.Code, addToCartInputModel.Quantity);
+            this._cartService.AddToCart(inputModel.Code, inputModel.Quantity);
 
             var preview = this._cartService.GetCartPreview();
 

@@ -321,6 +321,7 @@
     <Compile Include="Infrastructure\AppMode\AppModeSelectionFactory.cs" />
     <Compile Include="Infrastructure\AppMode\AppModeService.cs" />
     <Compile Include="Infrastructure\DependencyInjection\DependencyResolverInitialization.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\StructureMapHttpControllerActivator.cs" />
     <Compile Include="Infrastructure\DependencyInjection\StructureMapDependencyResolver.cs" />
     <Compile Include="Infrastructure\Models\SiteBlock.cs" />
     <Compile Include="Infrastructure\Models\SiteCategory.cs" />
@@ -373,6 +374,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Static\js\cartService.js" />
     <Content Include="Static\js\main-react.js" />
     <Content Include="Static\js\main-vue.js" />
     <Content Include="Static\js\main-angular.js" />
@@ -709,6 +711,7 @@
     <Content Include="package-lock.json" />
     <Content Include="Features\SiteHeader\Views\SiteHeader.cshtml" />
     <Content Include="Features\SiteFooter\Views\SiteFooter.cshtml" />
+    <Content Include="Features\Layout\Views\RootLayout.cshtml" />
     <None Include="packages.config" />
     <Content Include="Static\css\_foundation-settings.scss" />
     <Content Include="Static\css\_main-common.scss" />

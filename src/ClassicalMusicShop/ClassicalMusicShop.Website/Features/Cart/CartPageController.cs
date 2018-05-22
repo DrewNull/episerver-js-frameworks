@@ -5,7 +5,7 @@
     using EPiServer.Web.Mvc;
     using Infrastructure.AppMode;
 
-    [Route(nameof(CartPage))]
+    [RoutePrefix(nameof(CartPage))]
     public class CartPageController : PageController<CartPage>
     {
         private readonly CartService _cartService;

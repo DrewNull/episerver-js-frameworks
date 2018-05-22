@@ -1,13 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Features/Layout/Views/RootLayout.cshtml";
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>TBD</title>
-</head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
-</html>
+@section HeadScripts
+{
+
+}
+
+@Html.Partial("~/Features/SiteHeader/Views/SiteHeader.cshtml")
+
+<div class="page-content">
+    @RenderBody()
+</div>
+
+@Html.Action("Render", "SiteFooter")
+
+@section FooterScripts
+{
+    <script src="~/Static/dist/main-vue.js"></script>
+}

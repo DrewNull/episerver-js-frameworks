@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width" />
+    <title>Null's Classical Music Emporium</title>
+    <link href="~/Static/dist/main-original.css" rel="stylesheet" />
+    <link href="~/Static/libs/foundation-icons/foundation-icons.css" rel="stylesheet" />
+    @if (IsSectionDefined("HeadScripts"))
+    {
+        @RenderSection("HeadScripts")
+    }
+</head>
+<body>
+    @RenderBody()
+    <script src="~/Static/libs/jquery.min.js"></script>
+    <script src="~/Static/libs/foundation.min.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+    @if (IsSectionDefined("FooterScripts"))
+    {
+        @RenderSection("FooterScripts")
+    }
+</body>
+</html>

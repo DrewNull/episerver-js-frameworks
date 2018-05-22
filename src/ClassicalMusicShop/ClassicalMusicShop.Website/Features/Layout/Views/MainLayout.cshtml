@@ -1,24 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "~/Features/Layout/Views/RootLayout.cshtml";
+}
 
-<html class="no-js">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width" />
-    <title>Null's Classical Music Emporium</title>
-    <link href="~/Static/dist/main-original.css" rel="stylesheet" />
-    <link href="~/Static/libs/foundation-icons/foundation-icons.css" rel="stylesheet" />
-</head>
-<body>
-    @Html.Partial("~/Features/SiteHeader/Views/SiteHeader.cshtml")
-    <div class="page-content">
-        @RenderBody()
-    </div>
-    @Html.Action("Render", "SiteFooter")
-    <script src="~/Static/libs/jquery.min.js"></script>
-    <script src="~/Static/libs/foundation.min.js"></script>
-    <script>
-        $(document).foundation();
-    </script>
-</body>
-</html>
+@section HeadScripts
+{
+    
+}
+
+@Html.Partial("~/Features/SiteHeader/Views/SiteHeader.cshtml")
+<div class="page-content">
+    @RenderBody()
+</div>
+@Html.Action("Render", "SiteFooter")
+
+@section FooterScripts
+{
+    
+}
