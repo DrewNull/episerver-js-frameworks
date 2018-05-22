@@ -380,7 +380,6 @@
     <Content Include="Static\js\main-angular.js" />
     <Content Include="Static\js\vue\cartPreview.js" />
     <Content Include="Static\js\vue\sheetMusicPage.js" />
-    <Content Include="Static\js\vue\vueInitialization.js" />
     <Content Include="Static\libs\foundation-icons\foundation-icons.css" />
     <Content Include="Static\libs\foundation-icons\foundation-icons.svg" />
     <Content Include="Static\libs\foundation-icons\preview.html" />
