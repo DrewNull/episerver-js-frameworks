@@ -5,3 +5,4 @@ Interesting Vue bits:
 - [IndexVue.cshtml](https://github.com/DrewNull/javascript-episerver-ope/blob/master/src/ClassicalMusicShop/ClassicalMusicShop.Website/Features/SheetMusic/Views/IndexVue.cshtml)
 - [main-vue.js](https://github.com/DrewNull/javascript-episerver-ope/blob/master/src/ClassicalMusicShop/ClassicalMusicShop.Website/Static/js/main-vue.js)
 - [Vue components](https://github.com/DrewNull/javascript-episerver-ope/tree/master/src/ClassicalMusicShop/ClassicalMusicShop.Website/Static/js/vue)
+- [MainLayoutVue.cshtml](https://github.com/DrewNull/javascript-episerver-ope/blob/master/src/ClassicalMusicShop/ClassicalMusicShop.Website/Features/Layout/Views/MainLayoutVue.cshtml)
